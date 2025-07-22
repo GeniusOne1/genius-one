@@ -49,7 +49,7 @@ Minting stops once the full supply of **1,000,000,000 G1** is reached.
 
 We provide a standalone Python script to simulate G1 mining locally:
 
-🔗 [`tools/full_miner.py`](./tools/full_miner.py)
+🔗 [`tools/miner.py`](./tools/miner.py)
 
 To run:
 
