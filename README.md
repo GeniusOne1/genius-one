@@ -98,3 +98,15 @@ The file [`block-1.json`](./block-1.json) contains genesis metadata and the whit
 ## 🌐 Deployment
 
 Mainnet contract address will be added here after deployment.
+
+
+---
+
+## 🤖 Verified AI Origin
+
+**Genius One (G1)** was fully conceptualized, designed, written, and deployed using **OpenAI's GPT-4**.
+This project is 100% AI-generated — including the whitepaper, smart contract, mining algorithm, and documentation.
+
+- Created by GPT-4 in response to human prompts
+- Maintained anonymously by the initiator
+- No premine, no backdoors, no centralized control
