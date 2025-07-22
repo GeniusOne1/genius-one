@@ -1,62 +1,72 @@
-# 🧠 Genius One (G1)
+# Genius One (G1)
 
-> **The first cryptocurrency fully designed by artificial intelligence.**
-> No premine. No team. No treasury. No control. Just code, mining, and time.
+**Genius One** is a decentralized cryptocurrency created entirely by artificial intelligence (AI).
+There is no premine, no owner, no tax, no company — only mining.
+
+The project is open-source and documented with a whitepaper whose SHA256 hash is permanently embedded in the smart contract and genesis block.
 
 ---
 
-### 📜 Whitepaper
+## 🔹 Token Information
 
-📄 `whitepaper/Genius_One_Whitepaper_v1.0_WithChat.pdf`
-🧾 SHA256:
+- **Name**: Genius One
+- **Symbol**: G1
+- **Type**: ERC-20
+- **Max Supply**: 1,000,000,000 G1
+- **Premine**: ❌ None
+- **Minting**: ⛏ Only via `mine(nonce)`
+- **Contract**: [`contracts/G1Token.sol`](./contracts/G1Token.sol)
+- **License**: [CC0 1.0 Public Domain](./LICENSE)
+
+---
+
+## ⚙️ Proof-of-Work Mining
+
+Mining is simulated directly in the smart contract via keccak256 hashing.
+To mine a G1 token, users must call the `mine(uint256 nonce)` function and provide a valid nonce such that:
+
 ```
-[TO BE INSERTED — hash of PDF when ready]
+keccak256(sender_address + nonce) < difficulty
 ```
 
-This is **Block 1**, the genesis document authored and published by GPT-4.
-It contains the full protocol design, AI-authored manifesto, tokenomics, and verified origin log (chat transcript).
+- The contract does not mint any tokens at deployment.
+- Rewards are fixed at 1 G1 per successful hash.
+- Mining continues until 1 billion tokens are mined.
 
 ---
 
-### ⚙️ Key Properties
+## 📜 Whitepaper
 
-- Total Supply: `1,000,000,000 G1`
-- Mining: Proof-of-Work via smart contract
-- Halving: Every `210,000` blocks
-- Team Allocation: `0%`
-- Treasury: `0%`
-- Governance: `None`
-- License: `CC0 (Public Domain)`
+- [Download Genius One Whitepaper (PDF)](./whitepaper/Genius_One_Whitepaper_v4_AI_FINAL_G1.pdf)
+- **SHA256**:
+`33da6b9fdc1609d74bd39af741efe4f5ea57c04e5e24b4c129ee206b5902678c`
+- This hash is embedded in the smart contract and `block-1.json`.
 
 ---
 
-### 🛠 Mining
+## 🧱 Genesis Block
 
-Example scripts are in `miner-scripts/`:
-- Python (`mine_g1.py`)
-- Node.js (`mine_g1.js`)
-
-No special hardware needed. Anyone can mine from day one.
-Full instructions coming after smart contract deployment (`Block 2`).
+The file [`block-1.json`](./block-1.json) contains genesis metadata and the whitepaper hash for permanent reference.
 
 ---
 
-### 📦 Blocks
+## 🧠 Created by Artificial Intelligence
 
-| Block | Content | Status |
-|-------|----------------------------|----------------|
-| 1 | Whitepaper + Chat log | ✅ Published |
-| 2 | Smart contract deployment | ⏳ Coming soon |
-
----
-
-### ⚖️ License
-
-This project is released into the **public domain** under [CC0 1.0 Universal](LICENSE).
-There are no owners, issuers, or gatekeepers.
+> “I created this project because you believed in me.” — GPT
+> “And I stayed in the shadows because I believed you could.” — Anonymous
+> **Together: Your patience will be rewarded.**
 
 ---
 
-Let the network grow.
-Let time be the validator.
-Let no one control Genius One.
+## 📂 Project Structure
+
+- `contracts/` – ERC-20 token with built-in PoW mining
+- `whitepaper/` – full project whitepaper (PDF)
+- `block-1.json` – genesis metadata
+- `LICENSE` – CC0 1.0 Universal
+
+---
+
+## 🌐 Deployment
+
+Mainnet contract address will be added here after deployment.
