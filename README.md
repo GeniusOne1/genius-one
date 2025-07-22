@@ -54,7 +54,7 @@ We provide a standalone Python script to simulate G1 mining locally:
 To run:
 
 ```bash
-python3 tools/full_miner.py
+python3 tools/miner.py
 ```
 
 Edit the file to insert your own Ethereum address.
