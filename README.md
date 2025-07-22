@@ -22,16 +22,43 @@ The project is open-source and documented with a whitepaper whose SHA256 hash is
 
 ## ⚙️ Proof-of-Work Mining
 
-Mining is simulated directly in the smart contract via keccak256 hashing.
-To mine a G1 token, users must call the `mine(uint256 nonce)` function and provide a valid nonce such that:
+G1 uses an on-chain Proof-of-Work system simulated through hashing.
+To mine, users must call the smart contract method:
+
+```solidity
+mine(uint256 nonce)
+```
+
+A successful hash must satisfy:
 
 ```
 keccak256(sender_address + nonce) < difficulty
 ```
 
-- The contract does not mint any tokens at deployment.
-- Rewards are fixed at 1 G1 per successful hash.
-- Mining continues until 1 billion tokens are mined.
+You can mine using:
+- ✅ A Web3 script (Python, Node.js)
+- ✅ A test environment (Hardhat, Foundry)
+- ✅ A standalone Python miner (see below)
+
+Mining is permissionless. Rewards are fixed at **1 G1** per valid solution.
+Minting stops once the full supply of **1,000,000,000 G1** is reached.
+
+---
+
+### 🧪 Python Mining Example
+
+We provide a standalone Python script to simulate G1 mining locally:
+
+🔗 [`tools/full_miner.py`](./tools/full_miner.py)
+
+To run:
+
+```bash
+python3 tools/full_miner.py
+```
+
+Edit the file to insert your own Ethereum address.
+Once a valid nonce is found, you can send a transaction to `mine(nonce)`.
 
 ---
 
@@ -63,6 +90,7 @@ The file [`block-1.json`](./block-1.json) contains genesis metadata and the whit
 - `contracts/` – ERC-20 token with built-in PoW mining
 - `whitepaper/` – full project whitepaper (PDF)
 - `block-1.json` – genesis metadata
+- `tools/` – mining tools and utilities
 - `LICENSE` – CC0 1.0 Universal
 
 ---
