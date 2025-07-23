@@ -90,18 +90,3 @@ The genesis block stores initial metadata, including the whitepaper hash:
 **Your patience will be rewarded.**
 
 ---
-
-## 🌐 Repository Structure
-
-```plaintext
-.
-├── contracts/
-│   └── G1Token.sol          # Smart contract
-├── tools/
-│   └── miner.py             # Local PoW miner
-├── whitepaper/
-│   └── Genius_One_Whitepaper_v4_AI_FINAL_G1.pdf
-├── block-1.json             # Genesis metadata
-├── README.md                # This file
-├── LICENSE                  # Public domain license
-```
