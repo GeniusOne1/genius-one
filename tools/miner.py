@@ -5,70 +5,67 @@ from datetime import datetime
 
 # Load configuration
 with open("tools/miner_config.json", "r") as f:
-config = json.load(f)
+    config = json.load(f)
 
 CHAIN_FILE = "tools/chain.json"
 
-# Load blockchain
+# Load existing chain or create a new one
 try:
-with open(CHAIN_FILE, "r") as f:
-chain = json.load(f)
+    with open(CHAIN_FILE, "r") as f:
+        chain = json.load(f)
 except FileNotFoundError:
-chain = []
+    chain = []
 
-# Get last block data
-last_block_time = datetime.strptime(chain[-1]["timestamp"], "%Y-%m-%d %H:%M:%S") if chain else datetime.utcnow()
+# Get last block info
+last_block_time = datetime.strptime(chain[-1]["timestamp"], "%Y-%m-%d %H:%M:%S") if chain else datetime.now()
 last_block_hash = chain[-1]["hash"] if chain else "0" * 64
-block_height = len(chain)
+block_number = len(chain) + 1
 
+# Reward calculation with halving
 def calculate_reward(height, base_reward, halving_interval):
-halvings = height // halving_interval
-reward = base_reward // (2 ** halvings)
-return max(reward, 0)
+    halvings = height // halving_interval
+    reward = base_reward // (2 ** halvings)
+    return max(reward, 0)
 
-def is_valid_hash(h, prefix):
-return h.startswith(prefix)
+# Parameters from config
+difficulty_prefix = config["initial_difficulty_prefix"]
+base_reward = config["base_reward"]
+halving_interval = config["halving_interval"]
+total_supply = config["total_supply"]
+interval = config["mining_interval_seconds"]
 
+# Mining loop
 while True:
-now = datetime.utcnow()
-time_diff = (now - last_block_time).total_seconds()
-if time_diff < config["minimum_block_time_seconds"]:
-time.sleep(1)
-continue
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    reward = calculate_reward(block_number, base_reward, halving_interval)
+    block = {
+        "number": block_number,
+        "timestamp": timestamp,
+        "previous_hash": last_block_hash,
+        "reward": reward,
+    }
 
-reward = calculate_reward(
-block_height,
-config["initial_block_reward"],
-config["halving_interval_blocks"]
-)
+    nonce = 0
+    while True:
+        block["nonce"] = nonce
+        block_string = json.dumps(block, sort_keys=True).encode()
+        block_hash = hashlib.sha256(block_string).hexdigest()
+        if block_hash.startswith(difficulty_prefix):
+            block["hash"] = block_hash
+            break
+        nonce += 1
 
-if reward == 0 or sum(b["reward"] for b in chain) >= config["total_supply"]:
-print("Mining complete. Total supply reached.")
-break
+    chain.append(block)
 
-nonce = 0
-while True:
-data = f"{last_block_hash}{block_height}{now}{nonce}".encode()
-h = hashlib.sha256(data).hexdigest()
-if is_valid_hash(h, config["initial_difficulty_prefix"]):
-break
-nonce += 1
+    # Save the updated chain
+    with open(CHAIN_FILE, "w") as f:
+        json.dump(chain, f, indent=4)
 
-block = {
-"height": block_height,
-"timestamp": now.strftime("%Y-%m-%d %H:%M:%S"),
-"previous_hash": last_block_hash,
-"hash": h,
-"nonce": nonce,
-"reward": reward
-}
+    print(f"Block {block_number} mined with hash: {block['hash']}, reward: {reward}")
 
-chain.append(block)
-with open(CHAIN_FILE, "w") as f:
-json.dump(chain, f, indent=4)
+    # Update for next block
+    last_block_hash = block["hash"]
+    block_number += 1
 
-print(f"Mined block #{block_height} | Reward: {reward} G1 | Hash: {h}")
-block_height += 1
-last_block_time = now
-last_block_hash = h
-break # Run once
+    # Respect mining interval
+    time.sleep(interval)
