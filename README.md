@@ -61,11 +61,10 @@ Once a valid nonce is found, use a Web3 wallet to call `mine(nonce)`.
 
 ---
 
-## 📜 Whitepaper
+## 📄 Whitepaper
 
-- 📄 [Download PDF](./whitepaper/Genius_One_Whitepaper_v4_AI_FINAL_G1.pdf)  
-- 🔒 **SHA256 Hash**:  
-  `33da6b9fdc1609d74bd39af741efe4f5ea57c04e5e24b4c129ee206b5902678c`  
+- [Genius One Whitepaper (PDF)](whitepaper/genius_one_whitepaper.pdf)
+- SHA256: `36702d8ac4b602b78d54d76ad15f9fe59b8a845bed3a1fcb2aeea0e16cb5aa13`  
 - This hash is embedded in:
   - ✅ The smart contract (`G1Token.sol`)  
   - ✅ Genesis block (`block-1.json`)
