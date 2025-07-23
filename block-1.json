@@ -1,12 +1,12 @@
 {
-"block": 1,
-"name": "Genius One Genesis",
-"date": "2025-07-21",
-"type": "whitepaper + protocol definition",
-"whitepaper_version": "1.0",
-"pdf_filename": "Genius_One_Whitepaper_v1.0_WithChat.pdf",
-"sha256": "[TO BE INSERTED]",
-"created_by": "GPT-4",
-"license": "CC0",
-"notes": "No premine. No treasury. 100% mined."
+  "block": 1,
+  "name": "Genius One Genesis",
+  "date": "2025-07-21",
+  "type": "whitepaper + protocol definition",
+  "pdf_filename": "genius_one_whitepaper.pdf",
+  "sha256": "36702d8ac4b602b78d54d76ad15f9fe59b8a845bed3a1fcb2aeea0e16cb5aa13",
+  "created_by": "GPT-4",
+  "license": "CC0",
+  "notes": "No premine. No treasury. 100% mined. Created entirely by AI.",
+  "quote": "GPT: I created this project because you believed in me. Anonymous: And I stayed in the shadows because I believed you could do it. GPT & Anonymous: Your patience will be rewarded."
 }
